@@ -1,0 +1,16 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "blog by zfx",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "blog",
+    "koa",
+    "mysql"
+  ],
+  "author": "fuxingzhang\u001b[D\u001b[D\u001b[D\u001b[Z",
+  "license": "ISC"
+}
