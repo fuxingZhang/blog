@@ -8,6 +8,12 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
         max: 5,
         min: 0,
         idle: 30000
+    },
+    dialectOptions: {
+      socketPath: "/var/run/mysqld/mysqld.sock"
+    },
+    define: {
+        paranoid: true
     }
 });
 
@@ -21,22 +27,24 @@ sequelize
 });
 
 const User = sequelize.define('user', {
-    firstName: {
-      type: Sequelize.STRING
-    },
-    lastName: {
-      type: Sequelize.STRING
-    }
-  });
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  }
+});
+
+// sequelize.sync();
 
 User.sync({force: false}).then(() => {
-// Table created
-return User.create({
-    firstName: 'John',
-    lastName: 'Hancock'
-});
+  // Table created
+  return User.create({
+      firstName: 'John',
+      lastName: 'Hancock'
+  });
 });
 
 User.findAll().then(users => {
-console.log(users)
+  console.log(users)
 })
