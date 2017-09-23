@@ -1,4 +1,15 @@
-const sequelize = new Sequelize('mysql://localhost:3306/blog');
+const Sequelize = require('squelize')
+const config = require('./config');
+
+const sequelize = new Sequelize(config.database, config.username, config.password, {
+    host: config.host,
+    dialect: 'mysql',
+    pool: {
+        max: 5,
+        min: 0,
+        idle: 30000
+    }
+});
 
 sequelize
 .authenticate()
@@ -18,14 +29,14 @@ const User = sequelize.define('user', {
     }
   });
 
-  User.sync({force: false}).then(() => {
-    // Table created
-    return User.create({
-      firstName: 'John',
-      lastName: 'Hancock'
-    });
-  });
+User.sync({force: false}).then(() => {
+// Table created
+return User.create({
+    firstName: 'John',
+    lastName: 'Hancock'
+});
+});
 
-  User.findAll().then(users => {
-    console.log(users)
-  })
+User.findAll().then(users => {
+console.log(users)
+})
