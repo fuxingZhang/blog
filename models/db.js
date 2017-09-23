@@ -10,7 +10,7 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
         idle: 30000
     },
     dialectOptions: {
-      socketPath: "/var/lib/mysqld/mysqld.sock"
+      socketPath: "/var/run/mysqld/mysqld.pid"
     },
     define: {
         paranoid: true
