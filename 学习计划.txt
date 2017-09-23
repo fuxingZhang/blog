@@ -1,0 +1,2 @@
+安装测试mySQL,使用QUELIZE
+自己动手写一个用vue.js、mySQL、node.js、bootstrap或者（妹子UI、饿了吗UI、iview UI）搭建一个博客系统

@@ -12,5 +12,10 @@
     "mysql"
   ],
   "author": "fuxingzhang\u001b[D\u001b[D\u001b[D\u001b[Z",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "mysql2": "^1.4.2",
+    "sequelize": "^4.10.2",
+    "vue": "^2.4.4"
+  }
 }
