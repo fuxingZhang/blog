@@ -9,12 +9,14 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
         min: 0,
         idle: 30000
     },
-    dialectOptions: {
-      socketPath: "/var/lib/mysql/mysql.sock"
-    },
-    define: {
-        paranoid: true
-    }
+    // dialectOptions: {
+    //   socketPath: "/var/lib/mysql/mysql.sock"
+    // },
+    //	使用逻辑删除。设置为true后，调用 destroy 方法时将不会删队模型，
+    //而是设置一个 deletedAt 列。此设置需要 timestamps=true
+    // define: {                 
+    //     paranoid: true
+    // }
 });
 
 sequelize
