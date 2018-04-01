@@ -52,7 +52,7 @@ router
 .post('/add', async ctx => {
 	await userModel.create({
 		name:"张复星",
-		email:"502545703"
+		email:"502545703",
 		password:"19871019"
 	})
 	ctx.body = "ok"
