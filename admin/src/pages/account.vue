@@ -70,6 +70,7 @@ export default {
     }
   },
   async created(){
+    return
     let res = await API.getUsers()
     console.log(res)
     if( res.status != 200 ){

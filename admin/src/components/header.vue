@@ -11,20 +11,28 @@
 		  <router-link to="/admin">
 				<el-menu-item index="1" class="h1"><h1>博客后台</h1></el-menu-item>
 			</router-link>
+			<router-link v-if="logged" class="pc" to="/admin/articalList">
+				<el-menu-item index="2">文章列表</el-menu-item>
+			</router-link>
+			<router-link v-if="logged" class="pc" to="/admin/addArtical">
+				<el-menu-item index="3">添加文章</el-menu-item>
+			</router-link>
 			<router-link v-if="logged" class="pc" to="/admin/tag">
-				<el-menu-item index="2">标签管理</el-menu-item>
+				<el-menu-item index="4">标签管理</el-menu-item>
 			</router-link>
 			<router-link v-if="logged" class="pc" to="/admin/account">
-				<el-menu-item index="3">帐号管理</el-menu-item>
+				<el-menu-item index="5">帐号管理</el-menu-item>
 			</router-link>
 		  <router-link v-if="!logged" to="/login">
-		  	<el-menu-item index="4" class="right">登录</el-menu-item>
+		  	<el-menu-item index="6" class="right">登录</el-menu-item>
 		  </router-link>
 		  <el-submenu v-if="logged" index="7" class="right">
 		    <template slot="title">{{name}}</template>
-		    <el-menu-item class="unseen" index="7-1">标签管理</el-menu-item>
-		    <el-menu-item class="unseen" index="7-2">帐号管理</el-menu-item>
-		    <el-menu-item index="7-3">退出</el-menu-item>
+		    <el-menu-item class="unseen" index="7-1">文章列表</el-menu-item>
+		    <el-menu-item class="unseen" index="7-2">添加文章</el-menu-item>
+		    <el-menu-item class="unseen" index="7-3">标签管理</el-menu-item>
+		    <el-menu-item class="unseen" index="7-4">帐号管理</el-menu-item>
+		    <el-menu-item index="7-5">退出</el-menu-item>
 		  </el-submenu>
 		</el-menu>
 	</div>
@@ -65,12 +73,18 @@ export default {
       console.log(key, keyPath);
       switch( key ){
 	      case '7-1' :
-	      	this.$router.push('/admin/tag')
+	      	this.$router.push('/admin')
 	      	break
 	      case '7-2' :
-	      	this.$router.push('/admin/account')
+	      	this.$router.push('/admin/articalList')
 	      	break
-      	case '7-3' :
+	      case '7-3' :
+	      	this.$router.push('/admin/addArtical')
+	      	break
+	      case '7-4' :
+	      	this.$router.push('/admin/tag')
+	      	break
+      	case '7-5' :
       		let res = await API.logout()
 	      	this.$message({
 		        showClose: true,

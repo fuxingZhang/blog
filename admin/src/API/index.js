@@ -43,5 +43,17 @@ export default {
   },
   deleteTag(tag){
     return request.delete('/tag/' + tag)
+  },
+  addArtical(data){
+    return request.post('/artical', data)
+  },
+  getArticalList(pageSize,page){
+    return request.get(`/articals?pageSize=${pageSize}&page=${page}`)
+  },
+  getArtical(page){
+    return request.get(`/artical/${page}`)
+  },
+  upadteArtical(id,data){
+    return request.put(`/artical/${id}`,data)
   }
 }

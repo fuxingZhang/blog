@@ -41,14 +41,14 @@ export default {
   methods: {
     async handleClose(tag) {
       let res = await API.deleteTag(tag)
-        if( res.status == 200 ){
-          this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
-        }
-        this.$message({
-          showClose: true,
-          message: res.status == 200 ? res.data.msg : res.data,
-          type: res.status == 200 ? 'success' : 'error'
-        });
+      if( res.status == 200 ){
+        this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+      }
+      this.$message({
+        showClose: true,
+        message: res.data,
+        type: res.status == 200 ? 'success' : 'error'
+      });
     },
 
     showInput() {

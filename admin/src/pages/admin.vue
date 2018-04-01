@@ -1,34 +1,27 @@
 <template>
   <div  class="admin">
     <div class="card">
-      <div id="editorElem" style="text-align:left"></div>
-      <button v-on:click="getContent">查看内容</button>
+      <div class="title">Dashboard</div>
+      <div class="content">
+        <h1>这是管理主页</h1>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import API from '@/API'
-import E from 'wangeditor'
 
 export default {
-  name: 'editor',
-  data () {
+  data(){
     return {
-      editorContent: ''
+      email:'',
+      password:'',
+      checked:false,
+
     }
-  },
+  } ,
   methods: {
-    getContent: function () {
-      alert(this.editorContent)
-    }
-  },
-  mounted() {
-    var editor = new E('#editorElem')
-    editor.customConfig.onchange = (html) => {
-      this.editorContent = html
-    }
-    editor.create()
   }
 }
 </script>
