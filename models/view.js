@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DateTypes){
-	return sequelize.define('tag', {
-	  tag:  DateTypes.STRING
+	return sequelize.define('view', {
+	  view:  DateTypes.STRING
 	})
 }

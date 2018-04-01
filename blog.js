@@ -18,6 +18,10 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}`);
 });
 
+const path = require('path')
+serve = require("koa-static")
+app.use(serve(path.join(__dirname, "/public")))
+
 // route
 app
 .use(router.routes())
