@@ -10,11 +10,11 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
   // you can also pass any dialect options to the underlying dialect library
   // - default is empty
   // - currently supported: 'mysql', 'postgres', 'mssql'
-  // dialectOptions: {
-  //   socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
-  //   supportBigNumbers: true,
-  //   bigNumberStrings: true
-  // },
+  dialectOptions: {
+    socketPath: '/var/lib/mysql/mysql.sock',
+    // supportBigNumbers: true,
+    // bigNumberStrings: true
+  },
 
   pool: {
     max: 5,
@@ -44,10 +44,8 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 let models = {};
 
 fs.readdirSync(__dirname).forEach(fileName => {
-  console.log('name',fileName)
   if (fileName === 'index.js' ) return 
   let modelName = path.basename(fileName, '.js')
-  console.log(modelName)
   models[modelName] = sequelize.import(path.join(__dirname, fileName))
 });
 

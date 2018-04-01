@@ -49,16 +49,19 @@ router
 	})
   ctx.body = artical
 })
+.post('/add', async ctx => {
+	await userModel.create({
+		name:"张复星",
+		email:"502545703"
+		password:"19871019"
+	})
+	ctx.body = "ok"
+})
 .post('/login', async ctx => {
 	const data = ctx.request.body
 	console.log('/login',data)	
 	const email = data.email
 	const password = data.password
-	await userModel.create({
-		name:"张复星",
-		email,
-		password
-	})
 	const user = await userModel.findOne({
 		where: {
 			email
