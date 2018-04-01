@@ -49,7 +49,7 @@ router
 	})
   ctx.body = artical
 })
-.post('/add', async ctx => {
+.get('/add', async ctx => {
 	await userModel.create({
 		name:"张复星",
 		email:"502545703",
