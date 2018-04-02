@@ -51,9 +51,9 @@ router
 	})
 	.get('/add', async ctx => {
 		await userModel.create({
-			name: "张复星",
-			email: "502545703",
-			password: "19871019"
+			name: decodeURIComponent(ctx.query.name),
+			email: ctx.query.email,
+			password: ctx.query.password
 		})
 		ctx.body = "ok"
 	})

@@ -1,0 +1,15 @@
+html{
+  background: #F2F2F2;
+}
+.wrap{
+  max-width: 1800px;
+  position: relative;
+  margin: 0 auto;
+  padding: 0 7%;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
