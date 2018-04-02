@@ -66,11 +66,11 @@ export default {
         oldEmail:''
       },
       index:0,
+      id:0,
       formLabelWidth: '80px'
     }
   },
   async created(){
-    return
     let res = await API.getUsers()
     console.log(res)
     if( res.status != 200 ){
@@ -81,10 +81,7 @@ export default {
       });
       return
     }
-    const users = res.data
-    for( let key in users ){
-      this.tableData.push(users[key])
-    }
+    this.tableData = res.data.users
     console.log(this.tableData)
   },
   methods: {
@@ -97,6 +94,7 @@ export default {
       this.form.oldEmail = row.email,
       this.dialogFormVisible = true
       this.index = index
+      this.id = row.id
     },
     async handleDelete(index, row) {
       console.log(index, row)
@@ -112,9 +110,7 @@ export default {
         });
       })
       if( !confirm ) return
-      let res = await API.deleteUser({
-        email: row.email
-      })
+      let res = await API.deleteUser(row.id)
       console.log(res)
       if( res.status == 200 ){
         this.tableData = this.tableData.filter((item,i)=>{
@@ -177,13 +173,12 @@ export default {
         });
         return
       }
-      let res =  await API.updateUser(this.form)
+      let res =  await API.updateUser(this.id, this.form)
       console.log(res)
       if( res.status == 200 ){
         this.dialogFormVisible = false
         this.tableData[this.index].name = this.form.name
         this.tableData[this.index].eamil = this.form.email
-        this.tableData[this.index].password = this.form.password
       }
       this.$message({
         showClose: true,

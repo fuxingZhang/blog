@@ -26,7 +26,8 @@
       <p class="label">内容</p>
       <div  ref="editor" style="text-align:left"></div>
       <div style="margin:25px 0 10px;text-align: center">
-        <el-button type="primary" @click="submit">提交</el-button>
+        <el-button type="primary" @click="submit">保存</el-button>
+        <el-button type="primary" @click="remove">删除</el-button>
       </div>
     </div>
   </div>
@@ -74,6 +75,19 @@ export default {
         message: res.data,
         type: res.status == 200 ? 'success' : 'error'
       });
+    },
+    async remove() {
+      let res = await API.removeArtical(this.id)
+      this.$message({
+        showClose: true,
+        message: res.data,
+        type: res.status == 200 ? 'success' : 'error'
+      });
+      if(res.status == 200){
+        this.$router.go(-1)
+        //window.history.go(-1)
+        //window.history.back()
+      }
     }
   },
   mounted() {

@@ -2,8 +2,8 @@ import axios from 'axios'
 
 const Util = {
   //host: 'http://localhost:3000/api/'
-  host: 'http://39.108.115.22:3000/api/'
-  // host: 'http://' + location.host + '/api/'
+  //host: 'http://39.108.115.22:3000/api/'
+  host: 'http://' + location.host + '/api/'
 }
 
 const request = axios.create({
@@ -14,7 +14,7 @@ const request = axios.create({
 })
 
 request.interceptors.response.use((response) => {
-  if( response.status == 401 ){
+  if (response.status == 401) {
     location.hash = '/login'
   }
   return response
@@ -23,37 +23,46 @@ request.interceptors.response.use((response) => {
 })
 
 export default {
-  login(data){
-    return request.post('/login',data)
+  login(data) {
+    return request.post('/login', data)
   },
-  register(data){
-    return request.post('/register',data)
+  register(data) {
+    return request.post('/register', data)
   },
-  logout(){
+  logout() {
     return request.post('/logout')
   },
-  getUsers(){
+  getUsers() {
     return request.get('/users')
   },
-  getTags(){
+  deleteUser(id) {
+    return request.delete('/user/' + id)
+  },
+  updateUser(id, data) {
+    return request.put('/user/' + id, data)
+  },
+  getTags() {
     return request.get('/tags')
   },
-  addTag(tag){
-    return request.post('/tag', {tag})
+  addTag(tag) {
+    return request.post('/tag', { tag })
   },
-  deleteTag(tag){
+  deleteTag(tag) {
     return request.delete('/tag/' + tag)
   },
-  addArtical(data){
+  addArtical(data) {
     return request.post('/artical', data)
   },
-  getArticalList(pageSize,page){
+  getArticalList(pageSize, page) {
     return request.get(`/articals?pageSize=${pageSize}&page=${page}`)
   },
-  getArtical(page){
+  getArtical(page) {
     return request.get(`/artical/${page}`)
   },
-  upadteArtical(id,data){
-    return request.put(`/artical/${id}`,data)
+  upadteArtical(id, data) {
+    return request.put(`/artical/${id}`, data)
+  },
+  removeArtical(id) {
+    return request.delete(`/artical/${id}`)
   }
 }
