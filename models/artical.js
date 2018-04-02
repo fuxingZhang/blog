@@ -18,7 +18,7 @@ module.exports = function(sequelize, DateTypes){
       comment: "标签"
     },
 	  summary: {
-	  	type: DateTypes.TEXT('tiny'),
+	  	type: DateTypes.TEXT,
       allowNull: false,
       comment: "摘要"
     },

@@ -13,7 +13,7 @@
 					<el-tag v-for="(item,index) in data.tag" :key="index" type="danger">{{item}}</el-tag>&nbsp;&nbsp;&nbsp;
 				</div>
 				<p>摘要:{{data.summary}}</p>
-				<div class="content" v-html="data.content" style="padding-bottom: 60px;"></div>
+				<div class="content" v-html="data.content" style="padding-bottom: 60px;line-height: 2;"></div>
 			</div>
 		</div>
 	</div>

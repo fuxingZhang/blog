@@ -49,14 +49,6 @@ router
 		})
 		ctx.body = artical
 	})
-	.get('/add', async ctx => {
-		await userModel.create({
-			name: decodeURIComponent(ctx.query.name),
-			email: ctx.query.email,
-			password: ctx.query.password
-		})
-		ctx.body = "ok"
-	})
 	.post('/login', async ctx => {
 		const data = ctx.request.body
 		console.log('/login', data)
