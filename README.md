@@ -3,7 +3,8 @@
 blog by zfx  
 
 
-### keywords : koa2 , mysql , node.js , sequelize , vue.js , element-ui
+### 所用技术 : 
+koa2 , mysql , node.js , sequelize , vue.js , element-ui
 
 ### 响应式：
 PC+mobile一套代码
