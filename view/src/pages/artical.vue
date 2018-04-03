@@ -89,7 +89,7 @@ export default {
   height: 32px;
   line-height: 30px;
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 420px) {
 	.artical {
 		padding: 20px 0;
 	}

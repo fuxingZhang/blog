@@ -35,4 +35,9 @@ export default {
 	background: #fff;
 	line-height: 3;
 }
+@media screen and (max-width: 420px) {
+	.about .main {
+		margin: 20px 0;
+	}
+}
 </style>
