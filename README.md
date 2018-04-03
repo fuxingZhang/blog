@@ -5,12 +5,12 @@
 
 ├── admin                                         // 管理后台
 ├── config                                        // 数据库配置
+├── front                                         // 前端目录
 ├── models                                        // 数据库模型
 ├── public                                        // vue打包的静态文件（应该交给ngnix）
 ├── routes                                        // 后台路由
 ├── screenshots                                   // 项目截图
-├── utils                                         // 中间件（跨域、鉴权）
-├── views                                         // 前端目录
+├── utils                                         // 工具目录（跨域、鉴权）
 ├── blog.js                                       // 入口文件
 ├── package.json                                  // 安装依赖
 

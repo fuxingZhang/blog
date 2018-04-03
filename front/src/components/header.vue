@@ -1,7 +1,9 @@
 <template>
   <div class="header">
     <div class="wrap">
-        <h1>张复星的博客</h1>
+        <router-link to="/">
+            <h1>张复星的博客</h1>
+        </router-link>
         <div class="fr pc">
             <router-link to="/">首页</router-link>
             <a href="https://github.com/fuxingZhang" target="_blank">GitHub</a>
