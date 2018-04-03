@@ -15,7 +15,7 @@ http://39.108.115.22/
 http://39.108.115.22/admin/
 
 ### 第一篇测试文章（图片以base64存入mysql了）：
-https://github.com/fuxingZhang/blog/tree/master/img/文章详情.jpg
+![文章详情]https://github.com/fuxingZhang/blog/tree/master/img/文章详情.jpg
 
 ### 后台展示：
 
