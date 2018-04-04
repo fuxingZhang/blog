@@ -54,8 +54,9 @@
     flex: 0 0 auto;
 }
 .header h1{
+		color:#fff;
     font-size: 22px;
-    font-weight: bold;
+    font-weight: 500;
     display: inline-block;
     font-family: "Hiragino Sans GB";
 }
