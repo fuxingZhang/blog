@@ -1,6 +1,6 @@
 <template>
-  <!-- <div class="index"> -->
-  <div class="index" v-loading="loading">
+  <div class="index" v-if="!loading">
+  <!-- <div class="index" v-loading="loading"> -->
     <div class="wrap">
       <el-row>
         <el-col :xs="24" :sm="16" :md="16" :lg="16">
@@ -274,7 +274,7 @@ export default {
     display: none;
   }
   .index .left {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 }
 
@@ -290,7 +290,7 @@ export default {
     display: block;
   }
   .index {
-    padding: 20px 15px 0;
+    padding: 15px 15px 0;
   }
 }
 

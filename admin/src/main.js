@@ -10,9 +10,9 @@ import '@/css/reset.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import router from './router'
-import VueClipboards from 'vue-clipboards';
+// import VueClipboards from 'vue-clipboards'; //复制模块
 
-Vue.use(VueClipboards);
+// Vue.use(VueClipboards);
 Vue.use(ElementUI)
 
 new Vue({
