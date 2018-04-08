@@ -39,8 +39,16 @@ router
 			limit: pageSize,
 			offset: (page - 1) * pageSize
 		}
-		if(title) data.where.title = { [Op.like]: `%${title}%` }
-		if(tag) data.where.tag = tag
+		if(title) data.where = { 
+			title: { 
+				[Op.like]: `%${title}%` 
+			} 
+		}
+		if(tag) data.where = { 
+			tag: {
+				[Op.like]: `%${tag}%` 
+			} 
+		}
 		let articals = await articalModel.findAndCountAll(data)
 		ctx.body = articals
 	})
