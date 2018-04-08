@@ -1,6 +1,6 @@
 <template>
-  <div class="index">
-  <!-- <div class="index" v-loading="loading"> -->
+  <!-- <div class="index"> -->
+  <div class="index" v-loading="loading">
     <div class="wrap">
       <el-row>
         <el-col :xs="24" :sm="16" :md="16" :lg="16">
@@ -15,7 +15,7 @@
               <span>{{item.comment}} 条评论</span>
             </div>
             <p>摘要:{{item.summary}}</p>
-            <router-link :to="'artical/' + item.id " >
+            <router-link :to="'/admin/editArtical/' + item.id " >
               <el-button type="danger">阅读全文</el-button>
             </router-link>
           </div>
@@ -89,12 +89,12 @@ export default {
     }
   },
   async created(){
-    const loading = this.$loading({
-          lock: true,
-          text: 'Loading',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)'
-        })
+    // const loading = this.$loading({
+    //   lock: true,
+    //   text: 'Loading',
+    //   spinner: 'el-icon-loading',
+    //   background: 'rgba(0, 0, 0, 0.7)'
+    // })
     let [res_tags,res] = await Promise.all([API.get('/tags'), API.get(`/articals?pageSize=${this.pageSize}&page=${this.page}`)])
     this.tags = res_tags.data.tags
     this.total = res.data.count
@@ -107,8 +107,8 @@ export default {
         created_at: new Date(artical.created_at).toLocaleString()
       }
     })
-    loading.close();
-    // this.loading = false
+    // loading.close();
+    this.loading = false
   },
   methods: {
     handleSizeChange(val) {
