@@ -1,10 +1,11 @@
 <template>
   <div class="index">
+  <!-- <div class="index" v-loading="loading"> -->
     <div class="wrap">
       <el-row>
         <el-col :xs="24" :sm="16" :md="16" :lg="16">
           <div class="left" v-for="(item,index) in items" :key="index">
-            <router-link :to="'/admin/editArtical/' + item.id " >
+            <router-link :to="'artical/' + item.id " >
               <h2>{{item.title}}</h2>
             </router-link>
             <div>
@@ -14,7 +15,7 @@
               <span>{{item.comment}} 条评论</span>
             </div>
             <p>摘要:{{item.summary}}</p>
-            <router-link :to="'/admin/editArtical/' + item.id " >
+            <router-link :to="'artical/' + item.id " >
               <el-button type="danger">阅读全文</el-button>
             </router-link>
           </div>
@@ -30,24 +31,18 @@
           <div class="right">
             <div>
               <div class="input">
-                <el-input v-model="input" placeholder="请输入内容"></el-input>
+                <el-input v-model="input" placeholder="请输入标题"></el-input>
               </div>
-              <el-button type="danger" class="search">
+              <!--vue data和method 不能重名 -->
+              <el-button type="danger" class="search" @click="search">
                 <i class="el-icon-search"></i>
               </el-button>
               <h3>标签</h3>
               <ul>
-                <li>node</li>
-                <li>css</li>
-                <li>js</li>
-                <li>koa</li>
-                <li>docker</li>
-                <li>mysql</li>
-                <li>redis</li>
-                <li>服务器</li>
+                <li v-for="tag in tags" :key="tag" @click="filterTag(tag)" style="cursor: pointer;">{{tag}}</li>
               </ul>
             </div>
-            <div>
+            <!-- <div>
               <h3>分类目录</h3>
               <ul>
                 <li>前端</li>
@@ -59,7 +54,7 @@
                 <li>生活兴趣</li>
                 <li>VR全景</li>
               </ul>
-            </div>
+            </div> -->
           </div>
         </el-col>
       </el-row>
@@ -73,6 +68,10 @@ import API from '@/API'
 export default {
   data() {
     return {
+      loading:true,
+      tags:[],
+      tag:'',
+      title:'',
       input: '',
       currentPage: 1,
       total: 100,
@@ -90,10 +89,14 @@ export default {
     }
   },
   async created(){
-    let tags = await API.getTags()
-    console.log(tags)
-    let res = await API.getArticalList(this.pageSize,this.page)
-    console.log(res)
+    const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
+    let [res_tags,res] = await Promise.all([API.get('/tags'), API.get(`/articals?pageSize=${this.pageSize}&page=${this.page}`)])
+    this.tags = res_tags.data.tags
     this.total = res.data.count
     this.items = res.data.rows.map( artical => {
       return {
@@ -104,6 +107,8 @@ export default {
         created_at: new Date(artical.created_at).toLocaleString()
       }
     })
+    loading.close();
+    // this.loading = false
   },
   methods: {
     handleSizeChange(val) {
@@ -111,8 +116,17 @@ export default {
     },
     async handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
-      let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=${val}`)
+      let path = `/articals?pageSize=${this.pageSize}&page=${val}`
+      if(this.tag) path += `&tag=${this.tag}`
+      if(this.title) path += `&title=${this.title}`
+      let res = await API.get(path)
       console.log(res)
+      this.$message({
+        showClose: true,
+        message: res.status == 200 ? '数据刷新成功' : res.data,
+        type: res.status == 200 ? 'success' : 'error'
+      });
+      if( res.status != 200 ) return
       this.total = res.data.count
       this.items = res.data.rows.map( artical => {
         return {
@@ -122,8 +136,54 @@ export default {
           created_at: new Date(artical.created_at).toLocaleString()
         }
       })
+    },
+    // vue data和method 不能重名
+    async search() {
+      let res = await API.get(`/articals?pageSize=${this.pageSize}&page=1&title=${this.input}`)
+      this.$message({
+        showClose: true,
+        message: res.status == 200 ? '数据刷新成功' : res.data,
+        type: res.status == 200 ? 'success' : 'error'
+      });
+      if( res.status != 200 ) return
+      this.page = 0
+      this.tag = ''
+      this.title = this.input
+      this.input = ''
+      this.total = res.data.count
+      this.items = res.data.rows.map( artical => {
+        return {
+          id: artical.id,
+          title: artical.title,
+          comment: '0',
+          summary: artical.summary,
+          created_at: new Date(artical.created_at).toLocaleString()
+        }
+      })
+    },
+    async filterTag(tag){
+      let res = await API.get(`/articals?pageSize=${this.pageSize}&page=1&tag=${tag}`)
+      this.$message({
+        showClose: true,
+        message: res.status == 200 ? '数据刷新成功' : res.data,
+        type: res.status == 200 ? 'success' : 'error'
+      });
+      if( res.status != 200 ) return
+      this.tag = tag
+      this.title = ''
+      this.page = 0
+      this.total = res.data.count
+      this.items = res.data.rows.map( artical => {
+        return {
+          id: artical.id,
+          title: artical.title,
+          comment: '0',
+          summary: artical.summary,
+          created_at: new Date(artical.created_at).toLocaleString()
+        }
+      })
     }
-  },
+  }
 }
 
 </script>
@@ -135,11 +195,6 @@ export default {
   padding: 40px 0 80px;
 }
 
-.wrap{
-  max-width: 1800px;
-  position: relative;
-  margin: 0 10%;
-}
 /* left */
 
 .index .left {

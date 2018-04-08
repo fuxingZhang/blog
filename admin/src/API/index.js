@@ -64,5 +64,8 @@ export default {
   },
   removeArtical(id) {
     return request.delete(`/artical/${id}`)
+  },
+  get(data){
+    return request.get(data)
   }
 }
