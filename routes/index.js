@@ -168,7 +168,7 @@ router
 	.get('/users', async ctx => {
 		let users = await userModel.findAll()
 		users = users.map( user => {
-			delete user[password]
+			delete user['password']
 			return user
 		})
 		ctx.body = { users }
