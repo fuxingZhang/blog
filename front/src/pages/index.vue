@@ -32,7 +32,7 @@
 							<div class="input">
 								<el-input v-model="input" placeholder="请输入标题"></el-input>
 							</div>
-							<el-button type="danger" class="search" @click="search">
+							<el-button type="danger" class="search" @click.native="search">
 								<i class="el-icon-search"></i>
 							</el-button>
 							<h3>标签</h3>
