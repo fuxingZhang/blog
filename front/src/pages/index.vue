@@ -33,11 +33,11 @@
 								<el-input v-model="input" placeholder="请输入标题"></el-input>
 							</div>
 							<el-button type="danger" class="search" @click="search">
-								<i class="el-icon-search" style="cursor: pointer;"></i>
+								<i class="el-icon-search"></i>
 							</el-button>
 							<h3>标签</h3>
 							<ul>
-								<li v-for="tag in tags" :key="tag" @click="filterTag(tag)">{{tag}}</li>
+								<li v-for="tag in tags" :key="tag" @click="filterTag(tag)" style="cursor: pointer;">{{tag}}</li>
 							</ul>
 						</div>
 						<!-- <div>
@@ -105,7 +105,7 @@ export default {
 		async handleCurrentChange(val) {
 			console.log(`当前页: ${val}`);
 			let search = `/articals?pageSize=${this.pageSize}&page=${val}`
-			if(this.tag) search += `&tag=${tag}`
+			if(this.tag) search += `&tag=${this.tag}`
 			if(this.search) search += `&title=${this.search}`
 			let res = await this.axios.get(search)
 			console.log(res)
@@ -126,7 +126,7 @@ export default {
 			})
 		},
 		async search() {
-			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=0&title=${this.search}`)
+			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=0&title=${this.input}`)
 			this.$message({
 				showClose: true,
 				message: res.status == 200 ? '数据刷新成功' : res.data,

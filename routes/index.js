@@ -49,6 +49,8 @@ router
 				[Op.like]: `%${tag}%` 
 			} 
 		}
+		console.log(data)
+		return
 		let articals = await articalModel.findAndCountAll(data)
 		ctx.body = articals
 	})
