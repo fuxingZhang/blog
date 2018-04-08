@@ -6,7 +6,7 @@ const router = new Router({
 	prefix: '/api'
 })
 const model = require('../models/index.js')
-
+const Op = require('sequelize').Op
 const tagModel = model.tag
 const articalModel = model.artical
 const userModel = model.user
@@ -33,11 +33,15 @@ router
 	.get('/articals', async ctx => {
 		let page = parseInt(ctx.query.page)
 		let pageSize = parseInt(ctx.query.pageSize)
-		console.log(page, pageSize)
-		let articals = await articalModel.findAndCountAll({
+		let {title, tag} = ctx.query
+		console.log(page, pageSize, title, tag)
+		let data = {
 			limit: pageSize,
 			offset: (page - 1) * pageSize
-		})
+		}
+		if(title) data.where.title = { [Op.like]: `%${title}%` }
+		if(tag) data.where.tag = tag
+		let articals = await articalModel.findAndCountAll(data)
 		ctx.body = articals
 	})
 	.get('/artical/:id', async ctx => {

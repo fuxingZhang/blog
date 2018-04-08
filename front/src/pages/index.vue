@@ -30,21 +30,14 @@
 					<div class="right">
 						<div>
 							<div class="input">
-								<el-input v-model="input" placeholder="请输入内容"></el-input>
+								<el-input v-model="input" placeholder="请输入标题"></el-input>
 							</div>
-							<el-button type="danger" class="search">
-								<i class="el-icon-search"></i>
+							<el-button type="danger" class="search" @click="search">
+								<i class="el-icon-search" style="cursor: pointer;"></i>
 							</el-button>
 							<h3>标签</h3>
 							<ul>
-								<li>node</li>
-								<li>css</li>
-								<li>js</li>
-								<li>koa</li>
-								<li>docker</li>
-								<li>mysql</li>
-								<li>redis</li>
-								<li>服务器</li>
+								<li v-for="tag in tags" :key="tag" @click="filterTag(tag)">{{tag}}</li>
 							</ul>
 						</div>
 						<div>
@@ -72,6 +65,9 @@
 export default {
 	data() {
 		return {
+			tags:[],
+			tag:'',
+			search:'',
 			input: '',
 			currentPage: 1,
 			total: 100,
@@ -89,10 +85,8 @@ export default {
 		}
 	},
 	async created(){
-		let tags = await this.axios.get('/tags')
-		console.log(tags)
-		let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=${this.page}`)
-		console.log(res)
+		let [tags,res] = await Promise.all([this.axios.get('/tags'),this.axios.get(`/articals?pageSize=${this.pageSize}&page=${this.page}`)])
+		this.tags = tags
 		this.total = res.data.count
 		this.items = res.data.rows.map( artical => {
 			return {
@@ -110,8 +104,17 @@ export default {
 		},
 		async handleCurrentChange(val) {
 			console.log(`当前页: ${val}`);
-			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=${val}`)
+			let search = `/articals?pageSize=${this.pageSize}&page=${val}`
+			if(this.tag) search += `&tag=${tag}`
+			if(this.search) search += `&title=${this.search}`
+			let res = await this.axios.get(search)
 			console.log(res)
+			this.$message({
+				showClose: true,
+				message: res.status == 200 ? '数据刷新成功' : res.data,
+				type: res.status == 200 ? 'success' : 'error'
+			});
+			if( res.status != 200 ) return
 			this.total = res.data.count
 			this.items = res.data.rows.map( artical => {
 				return {
@@ -121,8 +124,53 @@ export default {
 					created_at: new Date(artical.created_at).toLocaleString()
 				}
 			})
+		},
+		async search() {
+			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=0&title=${input}`)
+			this.$message({
+				showClose: true,
+				message: res.status == 200 ? '数据刷新成功' : res.data,
+				type: res.status == 200 ? 'success' : 'error'
+			});
+			if( res.status != 200 ) return
+			this.page = 0
+			this.tag = ''
+			this.search = this.input
+			this.input = ''
+			this.total = res.data.count
+			this.items = res.data.rows.map( artical => {
+				return {
+					id: artical.id,
+					title: artical.title,
+					comment: '0',
+					summary: artical.summary,
+					created_at: new Date(artical.created_at).toLocaleString()
+				}
+			})
+		},
+		async filterTag(tag){
+			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=0&tag=${tag}`)
+			this.$message({
+				showClose: true,
+				message: res.status == 200 ? '数据刷新成功' : res.data,
+				type: res.status == 200 ? 'success' : 'error'
+			});
+			if( res.status != 200 ) return
+			this.tag = tag
+			this.search = ''
+			this.page = 0
+			this.total = res.data.count
+			this.items = res.data.rows.map( artical => {
+				return {
+					id: artical.id,
+					title: artical.title,
+					comment: '0',
+					summary: artical.summary,
+					created_at: new Date(artical.created_at).toLocaleString()
+				}
+			})
 		}
-	},
+	}
 }
 
 </script>
