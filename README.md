@@ -48,3 +48,6 @@ http://39.108.115.22/admin/
 ![标签管理](https://github.com/fuxingZhang/blog/blob/master/screenshots/%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86.jpg)
 ![账号管理](https://github.com/fuxingZhang/blog/blob/master/screenshots/%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86.jpg)
 
+### 注意事项
+vue data和method 不能重名
+

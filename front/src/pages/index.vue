@@ -33,8 +33,8 @@
 							<div class="input">
 								<el-input v-model="input" placeholder="请输入标题"></el-input>
 							</div>
-							<!-- search 报错 -->
-							<el-button type="danger" class="search" @click="find">
+							<!--vue data和method 不能重名 -->
+							<el-button type="danger" class="search" @click="search">
 								<i class="el-icon-search"></i>
 							</el-button>
 							<h3>标签</h3>
@@ -70,7 +70,7 @@ export default {
 			loading:true,
 			tags:[],
 			tag:'',
-			search:'',
+			title:'',
 			input: '',
 			currentPage: 1,
 			total: 100,
@@ -115,10 +115,10 @@ export default {
 		},
 		async handleCurrentChange(val) {
 			console.log(`当前页: ${val}`);
-			let search = `/articals?pageSize=${this.pageSize}&page=${val}`
-			if(this.tag) search += `&tag=${this.tag}`
-			if(this.search) search += `&title=${this.search}`
-			let res = await this.axios.get(search)
+			let path = `/articals?pageSize=${this.pageSize}&page=${val}`
+			if(this.tag) path += `&tag=${this.tag}`
+			if(this.title) path += `&title=${this.title}`
+			let res = await this.axios.get(path)
 			console.log(res)
 			this.$message({
 				showClose: true,
@@ -136,8 +136,8 @@ export default {
 				}
 			})
 		},
-		// search 报错
-		async find() {
+		// vue data和method 不能重名
+		async search() {
 			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=1&title=${this.input}`)
 			this.$message({
 				showClose: true,
@@ -147,7 +147,7 @@ export default {
 			if( res.status != 200 ) return
 			this.page = 0
 			this.tag = ''
-			this.search = this.input
+			this.title = this.input
 			this.input = ''
 			this.total = res.data.count
 			this.items = res.data.rows.map( artical => {
@@ -169,7 +169,7 @@ export default {
 			});
 			if( res.status != 200 ) return
 			this.tag = tag
-			this.search = ''
+			this.title = ''
 			this.page = 0
 			this.total = res.data.count
 			this.items = res.data.rows.map( artical => {
