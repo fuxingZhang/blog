@@ -40,7 +40,7 @@
 								<li v-for="tag in tags" :key="tag" @click="filterTag(tag)">{{tag}}</li>
 							</ul>
 						</div>
-						<div>
+						<!-- <div>
 							<h3>分类目录</h3>
 							<ul>
 								<li>前端</li>
@@ -52,7 +52,7 @@
 								<li>生活兴趣</li>
 								<li>VR全景</li>
 							</ul>
-						</div>
+						</div> -->
 					</div>
 				</el-col>
 			</el-row>
@@ -126,7 +126,7 @@ export default {
 			})
 		},
 		async search() {
-			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=0&title=${input}`)
+			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=0&title=${this.search}`)
 			this.$message({
 				showClose: true,
 				message: res.status == 200 ? '数据刷新成功' : res.data,
