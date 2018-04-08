@@ -5,7 +5,7 @@
       <el-row>
         <el-col :xs="24" :sm="16" :md="16" :lg="16">
           <div class="left" v-for="(item,index) in items" :key="index">
-            <router-link :to="'artical/' + item.id " >
+            <router-link :to="'/admin/editArtical/' + item.id " >
               <h2>{{item.title}}</h2>
             </router-link>
             <div>
@@ -192,7 +192,7 @@ export default {
 @import '../css/iconfont/iconfont.css';
 
 .index {
-  padding: 40px 0 80px;
+  padding: 40px 10% 80px;
 }
 
 /* left */
@@ -273,6 +273,9 @@ export default {
   .only-pc {
     display: none;
   }
+  .index .left {
+    margin-bottom: 20px;
+  }
 }
 
 .page-mobile {
@@ -286,11 +289,14 @@ export default {
   .page-mobile {
     display: block;
   }
+  .index {
+    padding: 20px 15px 0;
+  }
 }
 
 @media screen and (max-width: 375px) {
   .index .left {
-    padding: 20px;
+    padding: 15px 15px 15px;
   }
 }
 </style>
