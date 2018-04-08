@@ -126,7 +126,7 @@ export default {
 			})
 		},
 		async search() {
-			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=0&title=${this.input}`)
+			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=1&title=${this.input}`)
 			this.$message({
 				showClose: true,
 				message: res.status == 200 ? '数据刷新成功' : res.data,
@@ -149,7 +149,7 @@ export default {
 			})
 		},
 		async filterTag(tag){
-			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=0&tag=${tag}`)
+			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=1&tag=${tag}`)
 			this.$message({
 				showClose: true,
 				message: res.status == 200 ? '数据刷新成功' : res.data,
