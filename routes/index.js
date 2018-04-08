@@ -37,7 +37,10 @@ router
 		console.log(page, pageSize, title, tag)
 		let data = {
 			limit: pageSize,
-			offset: (page - 1) * pageSize
+			offset: (page - 1) * pageSize,
+			order: [
+				['created_at', 'DESC'],
+			]
 		}
 		if(title) data.where = { 
 			title: { 
