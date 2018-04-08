@@ -23,7 +23,7 @@ koa2 , mysql , node.js , sequelize , vue.js , element-ui
 ### 响应式
 PC+mobile一套代码
 
-### 线上地址
+### 线上地址 (入门级阿里云服务器：1G内存, 1CPU，1M带宽, 带宽小，网速较慢)
 http://39.108.115.22/
 
 ### 后台地址
