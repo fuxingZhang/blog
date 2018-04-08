@@ -1,5 +1,6 @@
 <template>
 	<div class="index">
+	<!-- <div class="index" v-loading="loading"> -->
 		<div class="wrap">
 			<el-row>
 				<el-col :xs="24" :sm="16" :md="16" :lg="16">
@@ -32,7 +33,8 @@
 							<div class="input">
 								<el-input v-model="input" placeholder="请输入标题"></el-input>
 							</div>
-							<el-button type="danger" class="search" @click.native="search">
+							<!-- search 报错 -->
+							<el-button type="danger" class="search" @click="find">
 								<i class="el-icon-search"></i>
 							</el-button>
 							<h3>标签</h3>
@@ -65,6 +67,7 @@
 export default {
 	data() {
 		return {
+			loading:true,
 			tags:[],
 			tag:'',
 			search:'',
@@ -85,6 +88,12 @@ export default {
 		}
 	},
 	async created(){
+		const loading = this.$loading({
+          lock: true,
+          text: 'Loading',
+          spinner: 'el-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)'
+        })
 		let [res_tags,res] = await Promise.all([this.axios.get('/tags'),this.axios.get(`/articals?pageSize=${this.pageSize}&page=${this.page}`)])
 		this.tags = res_tags.data.tags
 		this.total = res.data.count
@@ -97,6 +106,8 @@ export default {
 				created_at: new Date(artical.created_at).toLocaleString()
 			}
 		})
+		loading.close();
+		// this.loading = false
 	},
 	methods: {
 		handleSizeChange(val) {
@@ -125,7 +136,8 @@ export default {
 				}
 			})
 		},
-		async search() {
+		// search 报错
+		async find() {
 			let res = await this.axios.get(`/articals?pageSize=${this.pageSize}&page=1&title=${this.input}`)
 			this.$message({
 				showClose: true,
