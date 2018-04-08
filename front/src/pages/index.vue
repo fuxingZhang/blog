@@ -85,8 +85,8 @@ export default {
 		}
 	},
 	async created(){
-		let [tags,res] = await Promise.all([this.axios.get('/tags'),this.axios.get(`/articals?pageSize=${this.pageSize}&page=${this.page}`)])
-		this.tags = tags
+		let [res_tags,res] = await Promise.all([this.axios.get('/tags'),this.axios.get(`/articals?pageSize=${this.pageSize}&page=${this.page}`)])
+		this.tags = res_tags.data.tags
 		this.total = res.data.count
 		this.items = res.data.rows.map( artical => {
 			return {
