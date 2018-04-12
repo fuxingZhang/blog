@@ -73,16 +73,16 @@ export default {
       console.log(key, keyPath);
       switch( key ){
 	      case '7-1' :
-	      	this.$router.push('/admin')
-	      	break
-	      case '7-2' :
 	      	this.$router.push('/admin/articalList')
 	      	break
-	      case '7-3' :
+	      case '7-2' :
 	      	this.$router.push('/admin/addArtical')
 	      	break
-	      case '7-4' :
+	      case '7-3' :
 	      	this.$router.push('/admin/tag')
+	      	break
+	      case '7-4' :
+	      	this.$router.push('/admin/account')
 	      	break
       	case '7-5' :
       		let res = await API.logout()
