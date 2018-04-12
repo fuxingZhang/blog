@@ -107,7 +107,7 @@ export default {
 			}
 		})
 		// loading.close();
-		// this.loading = false
+		this.loading = false
 	},
 	methods: {
 		handleSizeChange(val) {
