@@ -35,25 +35,26 @@ router
 		let pageSize = parseInt(ctx.query.pageSize)
 		let {title, tag} = ctx.query
 		console.log(page, pageSize, title, tag)
-		let data = {
+		let query = {
 			limit: pageSize,
 			offset: (page - 1) * pageSize,
 			order: [
 				['created_at', 'DESC'],
-			]
+			],
+			attributes: { exclude: ['content'] }
 		}
-		if(title) data.where = { 
+		if(title) query.where = { 
 			title: { 
 				[Op.like]: `%${title}%` 
 			} 
 		}
-		if(tag) data.where = { 
+		if(tag) query.where = { 
 			tag: {
 				[Op.like]: `%${tag}%` 
 			} 
 		}
-		console.log(data)
-		let articals = await articalModel.findAndCountAll(data)
+		console.log(query)
+		let articals = await articalModel.findAndCountAll(query)
 		ctx.body = articals
 	})
 	.get('/artical/:id', async ctx => {
