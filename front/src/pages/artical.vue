@@ -1,6 +1,6 @@
 <template>
-	<div class="artical">
-		<div class="wrap">
+	<div class="artical" v-loading="loading">
+		<div class="wrap" v-show="!loading">
 			<div class="box">
 				<h2>{{data.title}}</h2>
 				<div style="text-align: center">
@@ -24,13 +24,14 @@
 export default {
 	data() {
 		return {
+			loading:true,
 			data: {
 				title: '标题',
-				created_at:'2016-03-25',
-				comment:'11',
-				tag:[],
-				summary:'摘要',
-				content:'内容'
+				created_at: '2016-03-25',
+				comment: '11',
+				tag: [],
+				summary: '摘要',
+				content: '内容'
 			}
 		}
 	},
@@ -45,6 +46,7 @@ export default {
 			created_at: new Date(res.data.created_at).toLocaleString(),
 			content: res.data.content
 		}
+		this.loading = false
 	}
 }
 
@@ -55,6 +57,14 @@ export default {
 
 .artical {
 	padding: 30px 0 80px;
+}
+.artical .el-loading-mask {
+	position: fixed;
+  background-color: #F2F2F2;
+	top: 90px;
+	bottom: 90px;
+	/* position: absolute;  */   /* 默认 */
+	/* top: 40vh; */
 }
 .artical .box {
 	padding: 10px 30px;
