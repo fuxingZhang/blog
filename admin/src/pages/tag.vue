@@ -84,6 +84,9 @@ export default {
 .tag{
 	margin: 20px 20%;
 }
+.tag .el-tag {
+	margin: 10px;
+}
 .el-tag + .el-tag {
   margin-left: 10px;
 }
