@@ -30,7 +30,7 @@ http://39.108.115.22/
 http://39.108.115.22/admin/
 
 ### 2018年4月12日 更新
-随着文章的增加，文章列表加载变慢，引入loading效果  
+文章列表、文章详情引入loading效果  
 1.用户端header下部分loading效果  
 2.admin端全屏loading效果
 

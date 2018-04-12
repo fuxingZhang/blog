@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const Util = {
-  //host: 'http://localhost:3000/api/'
-  //host: 'http://39.108.115.22:3000/api/'
+  //host: 'http://localhost/api/'
+  //host: 'http://39.108.115.22/api/'
   host: 'http://' + location.host + '/api/'
 }
 

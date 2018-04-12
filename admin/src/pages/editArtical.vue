@@ -1,5 +1,5 @@
 <template>
-  <div  class="admin" v-if="!loading">
+  <div  class="admin" v-show="!loading">
     <div class="card">
       <p class="label">标题</p>
       <el-input
