@@ -1,5 +1,5 @@
 <template>
-  <div  class="admin">
+  <div  class="admin" v-if="!loading">
     <div class="card">
       <p class="label">标题</p>
       <el-input
@@ -41,6 +41,7 @@ export default {
   name: 'editor',
   data () {
     return {
+      loading:true,
       id:1,
       tags:[],
       title:'',
@@ -51,6 +52,12 @@ export default {
     }
   },
   async created(){
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
     let tags = await API.getTags()
     this.tags = tags.data.tags
     let {data} = await API.getArtical(this.$route.params.id)
@@ -61,6 +68,8 @@ export default {
     this.summary = data.summary,
     this.content = data.content
     this.editor.txt.html(this.content)
+    this.loading = false
+    loading.close();
   },
   methods: {
     async submit() {
