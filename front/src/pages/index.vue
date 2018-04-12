@@ -2,7 +2,7 @@
 	<!-- <div class="index" v-if="!loading"> -->
 	<div class="index" v-loading="loading">
 		<div class="wrap">
-			<el-row>
+			<el-row v-if="!loading"> 
 				<el-col :xs="24" :sm="16" :md="16" :lg="16">
 					<div class="left" v-for="(item,index) in items" :key="index">
 						<router-link :to="'artical/' + item.id " >
@@ -77,13 +77,13 @@ export default {
 			pageSize:10,
 			page:1,
 			items: [
-				{
-					id:1,
-					title: '标题',
-					created_at:'2016-03-25',
-					comment:'11',
-					summary:'Electron 是一个搭建跨平台桌面应用的框架，仅仅使用 JavaScript、HTML 以及 CSS，即可快速而容易地搭建一个原生应用。这对于想要涉及其他领域的开发者来说是一个非常大的福利。'
-				}
+				// {
+				// 	id:1,
+				// 	title: '标题',
+				// 	created_at:'2016-03-25',
+				// 	comment:'11',
+				// 	summary:'Electron 是一个搭建跨平台桌面应用的框架，仅仅使用 JavaScript、HTML 以及 CSS，即可快速而容易地搭建一个原生应用。这对于想要涉及其他领域的开发者来说是一个非常大的福利。'
+				// }
 			]
 		}
 	},
@@ -107,7 +107,7 @@ export default {
 			}
 		})
 		// loading.close();
-		this.loading = false
+		// this.loading = false
 	},
 	methods: {
 		handleSizeChange(val) {
@@ -192,6 +192,15 @@ export default {
 
 .index {
 	padding: 40px 0 80px;
+}
+
+.index .el-loading-mask {
+	position: fixed;
+  background-color: #F2F2F2;
+	top: 90px;
+	bottom: 90px;
+	/* position: absolute;  */   /* 默认 */
+	/* top: 40vh; */
 }
 
 /* left */
