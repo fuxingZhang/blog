@@ -89,12 +89,12 @@ export default {
     }
   },
   async created(){
-    // const loading = this.$loading({
-    //   lock: true,
-    //   text: 'Loading',
-    //   spinner: 'el-icon-loading',
-    //   background: 'rgba(0, 0, 0, 0.7)'
-    // })
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    })
     let [res_tags,res] = await Promise.all([API.get('/tags'), API.get(`/articals?pageSize=${this.pageSize}&page=${this.page}`)])
     this.tags = res_tags.data.tags
     this.total = res.data.count
@@ -107,8 +107,8 @@ export default {
         created_at: new Date(artical.created_at).toLocaleString()
       }
     })
-    // loading.close();
     this.loading = false
+    loading.close();
   },
   methods: {
     handleSizeChange(val) {
