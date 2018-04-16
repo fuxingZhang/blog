@@ -31,7 +31,7 @@ http://39.108.115.22/admin/
 
 ### 2018年4月12日 更新
 文章列表、文章详情引入loading效果  
-1.用户端：header以下，footer以上的main区域加入loading效果
+1.用户端：header以下，footer以上的main区域加入loading效果  
 2.admin端：全屏loading效果  
 
 ### 2018年4月8日 更新
