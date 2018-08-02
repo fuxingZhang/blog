@@ -130,6 +130,7 @@ export default {
       this.total = res.data.count
       this.items = res.data.rows.map( artical => {
         return {
+          id: artical.id,
           title: artical.title,
           comment: '0',
           summary: artical.summary,
