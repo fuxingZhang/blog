@@ -29,6 +29,12 @@ http://39.108.115.22/
 ### 后台地址
 http://39.108.115.22/admin/
 
+### 2018年8月20日 更新
+使用electron制作桌面端软件  
+  
+![文章详情](https://github.com/fuxingZhang/blog/blob/master/screenshots/electron.png)  
+
+
 ### 2018年4月12日 更新
 文章列表、文章详情引入loading效果  
 1.用户端：header以下，footer以上的main区域加入loading效果  

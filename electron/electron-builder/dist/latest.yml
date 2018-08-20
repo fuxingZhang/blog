@@ -1,0 +1,8 @@
+version: 1.0.0
+files:
+  - url: blog-setup-1.0.0.exe
+    sha512: pbtVxZdsfxLWbhB98K6pVHFku4mU0F3XgVPhbPtyzZVI25wU2qQuxK2zYv8q28OgQSVaTuEsrUys5GodyW/z4w==
+    size: 36805469
+path: blog-setup-1.0.0.exe
+sha512: pbtVxZdsfxLWbhB98K6pVHFku4mU0F3XgVPhbPtyzZVI25wU2qQuxK2zYv8q28OgQSVaTuEsrUys5GodyW/z4w==
+releaseDate: '2018-08-20T03:10:04.904Z'
