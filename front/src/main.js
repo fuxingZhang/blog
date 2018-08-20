@@ -16,7 +16,7 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', component: Index, name:'首页' },
   { path: '/about', component: About, name:'关于' },
-  { path: '/artical/:id', component: Artical, name:'文章详情'},
+  { path: '/artical/:id', component: Artical, name:'文章详情'}
 ]
 
 const router = new VueRouter({
