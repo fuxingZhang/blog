@@ -21,7 +21,7 @@
     "koa-static": "^4.0.2",
     "koa2-cors": "^2.0.3",
     "mysql2": "^1.4.2",
-    "sequelize": "^4.37.6",
+    "sequelize": "^5.15.1",
     "vue": "^2.4.4"
   }
 }
